@@ -1,0 +1,16 @@
+{
+  "name": "monitor_temperatura",
+  "version": "1.0.0",
+  "description": "pagina do monitor de temperatura",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rmrcunha",
+  "license": "ISC",
+  "dependencies": {
+    "faker": "^6.6.6",
+    "firebase": "^9.19.1",
+    "handlebars": "^4.7.7"
+  }
+}
