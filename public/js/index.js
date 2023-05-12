@@ -1,5 +1,5 @@
 import { initializeApp} from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
-import { getDatabase, ref, onValue,get} from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+import { getDatabase, ref, onValue} from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 const firebaseConfig = {
   apiKey: "AIzaSyAZiECJYQU6ETtTb-QfpsEMkswAKhaCVCM",
   authDomain: "monitordetemperatura-ab3b0.firebaseapp.com",
@@ -11,29 +11,37 @@ const firebaseConfig = {
 };
 const temp = document.querySelector("#temp");
 const tempMax = document.querySelector("#tempMax");
-const tempMin = document.querySelector("#tempMin");
 const app = initializeApp(firebaseConfig);
+const tempMin = document.querySelector("#tempMin");
+const hora = document.querySelector("#tempo")
 const referencia = ref(getDatabase(), "Paciente/");
 
 
-
-function temperatura(){    
-  var pegaTemps = onValue(referencia,(snapshot) =>{
-    var temperaturas = {}
+var temperaturas = {}
+function update(snapshot){
+  //(snapshot) =>{
+    temperaturas = snapshot.val()
 
     temp.innerHTML = `
-    <span >${snapshot.val()['temp'] + "º"}<span>
+    <span >${temperaturas.temp + "º"}<span>
     `
 
     tempMax.innerHTML = `
-    <p>${snapshot.val()['tempMax'] + "º"}<p>
+    <p>${temperaturas.tempMax + "º"}<p>
     `
 
     tempMin.innerHTML = `
-    <p>${snapshot.val()['tempMin'] + "º"}<p>
+    <p>${temperaturas.tempMin + "º"}<p>
     `
-  })
-  
+    hora.innerHTML = `
+    <p>${temperaturas.Hora + ":" + temperaturas.Mnts + ":" + temperaturas.Sgds}</p>
+    `
+
+  //}
+}
+
+function temperatura(){    
+  var pegaTemps = onValue(referencia,update)
 }
 
 temperatura();

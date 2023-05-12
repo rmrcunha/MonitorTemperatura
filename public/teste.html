@@ -1,0 +1,23 @@
+<html>
+     <head> 
+
+    <script language="JavaScript">
+    function escreverArquivo() {  
+    
+        var fso  = new ActiveXObject("Scripting.FileSystemObject");
+    
+        var fh = fso.CreateTextFile("c:Teste.txt", true); 
+    
+        fh.WriteLine("Tentativa de criar .txt 1");
+    
+        fh.Close(); 
+    
+    }
+    
+    </script></head>
+    <body>
+    
+    <p><script language="JavaScript">  escreverArquivo(); </script></p>
+    
+    </body>
+</html>
